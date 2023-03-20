@@ -1,2 +1,4 @@
 import Board from "./Board/Board";
-export { Board };
+import Square from "./Square/Square";
+
+export { Board, Square };
