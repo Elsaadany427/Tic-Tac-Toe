@@ -11,5 +11,9 @@
     margin-top: -1px;
     padding: 0;
     text-align: center;
-  }
-  
+}
+.board-row{
+    clear: both;
+    display: table;
+    content: '';
+}
