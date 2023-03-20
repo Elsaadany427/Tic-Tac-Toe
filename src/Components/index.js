@@ -1,2 +1,2 @@
-import Square from "./Square/Square";
-export { Square };
+import Board from "./Board/Board";
+export { Board };
