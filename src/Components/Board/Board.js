@@ -7,8 +7,28 @@ export default function Board() {
   // next step for x
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
+  // function to handle click if one of the two players has won
+  // or all the squers have completed
+  function handleClick(i) {
+    if (squares[i] || checkWinner(squares)) {
+      return;
+    }
+    const nextSquare = squares.slice();
+    nextSquare[i] = xIsNext ? "X" : "O";
+    setSquares(nextSquare);
+    setXIsNext(!xIsNext);
+  }
+  const winner = checkWinner(squares);
+  let Status;
+  if (winner) {
+    Status = "Winner: " + winner;
+  } else {
+    Status = "Next player: " + (xIsNext ? "X" : "O");
+  }
+
   return (
     <>
+      <div className="Status">{Status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -26,22 +46,7 @@ export default function Board() {
       </div>
     </>
   );
-  // function to handle click if one of the two players has won
-  // or all the squers have completed
-  function handleClick(i) {
-    if ((squares[i], checkWinner(squares))) {
-      return;
-    }
-    const nextSquare = squares.slice();
-    nextSquare[i] = xIsNext ? "X" : "O";
-    setSquares(nextSquare);
-    setXIsNext(!xIsNext);
 
-    const winner = checkWinner(squares);
-    let status = winner
-      ? "Winner: " + winner
-      : "Next player: " + (xIsNext ? "X" : "O");
-  }
   // function to check the winner
   function checkWinner(squares) {
     const lines = [
