@@ -1,12 +1,7 @@
 import React from "react";
 import { Square } from "../index";
-import { useState } from "react";
 
-export default function Board() {
-  // states to store the squers values and check the
-  // next step for x
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
+export default function Board({xIsNext, squares, onPlay}) {
   // function to handle click if one of the two players has won
   // or all the squers have completed
   function handleClick(i) {
@@ -15,8 +10,7 @@ export default function Board() {
     }
     const nextSquare = squares.slice();
     nextSquare[i] = xIsNext ? "X" : "O";
-    setSquares(nextSquare);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquare);
   }
   const winner = checkWinner(squares);
   let Status;
